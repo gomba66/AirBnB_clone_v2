@@ -55,6 +55,8 @@ class HBNBCommand(cmd.Cmd):
                 key_and_value = keyname_and_value.split('=')
                 key = key_and_value[0]
                 value = key_and_value[1]
+
+                value.replace('"', ' ')
                 value.replace('_', ' ')
 
                 setattr(obj, key, value)
