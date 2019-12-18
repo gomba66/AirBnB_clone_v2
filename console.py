@@ -57,9 +57,10 @@ class HBNBCommand(cmd.Cmd):
                 value = key_and_value[1]
 
                 if value.startswith('"'):
-                    value.replace('_', ' ')
-                    value.replace('"', '\"')
-                    setattr(obj, key, value)
+                    value_str = str(value)
+                    value_str.replace('_', ' ')
+                    value_str.replace('"', '\"')
+                    setattr(obj, key, value_str)
 
                 elif '.' in value:
                     setattr(obj, key, float(value))
