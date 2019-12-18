@@ -67,8 +67,7 @@ class HBNBCommand(cmd.Cmd):
                 else:
                     setattr(obj, key, int(value))
 
-                obj.save()
-
+            obj.save()
             print("{}".format(obj.id))
 
         except SyntaxError:
