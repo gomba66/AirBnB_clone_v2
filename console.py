@@ -56,10 +56,17 @@ class HBNBCommand(cmd.Cmd):
                 key = key_and_value[0]
                 value = key_and_value[1]
 
-                value.replace('_', ' ')
-                value.replace('"', '\"')
+                if value.startswith('"'):
+                    value.replace('_', ' ')
+                    value.replace('"', '\"')
+                    setattr(obj, key, value)
 
-                setattr(obj, key, value)
+                elif '.' in value:
+                    setattr(obj, key, float(value))
+
+                else:
+                    setattr(obj, key, int(value))
+
                 obj.save()
 
             print("{}".format(obj.id))
