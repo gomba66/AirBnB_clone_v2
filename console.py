@@ -41,10 +41,27 @@ class HBNBCommand(cmd.Cmd):
         try:
             if not line:
                 raise SyntaxError()
+
             my_list = line.split(" ")
-            obj = eval("{}()".format(my_list[0]))
-            obj.save()
+            class_name = my_list[0]
+
+            obj = eval("{}()".format(class_name))
+
+            my_list_cpy = my_list.copy()
+            my_list_cpy.remove(my_list_cpy[0])
+
+            for keyname_and_value in my_list_cpy:
+
+                key_and_value = keyname_and_value.split('=')
+                key = key_and_value[0]
+                value = key_and_value[1]
+                value.replace('_', ' ')
+
+                setattr(obj, key, value)
+                obj.save()
+
             print("{}".format(obj.id))
+
         except SyntaxError:
             print("** class name missing **")
         except NameError:
@@ -210,15 +227,15 @@ class HBNBCommand(cmd.Cmd):
         new_list.append(args[0])
         try:
             my_dict = eval(
-                args[1][args[1].find('{'):args[1].find('}')+1])
+                args[1][args[1].find('{'):args[1].find('}') + 1])
         except Exception:
             my_dict = None
         if isinstance(my_dict, dict):
-            new_str = args[1][args[1].find('(')+1:args[1].find(')')]
+            new_str = args[1][args[1].find('(') + 1:args[1].find(')')]
             new_list.append(((new_str.split(", "))[0]).strip('"'))
             new_list.append(my_dict)
             return new_list
-        new_str = args[1][args[1].find('(')+1:args[1].find(')')]
+        new_str = args[1][args[1].find('(') + 1:args[1].find(')')]
         new_list.append(" ".join(new_str.split(", ")))
         return " ".join(i for i in new_list)
 
