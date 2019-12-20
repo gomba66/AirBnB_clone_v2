@@ -52,7 +52,7 @@ class DBStorage:
 
         if cls:
 
-            for intance in self.__session.query(cls):
+            for instance in self.__session.query(cls):
                 key = '{}.{}'.format(type(instance).__name__, instance.id)
                 Dict[key] = instance
 
@@ -60,29 +60,29 @@ class DBStorage:
 
         else:
 
-            for intance in self.__session.query(User):
+            '''for intance in self.__session.query(User):
+                key = '{}.{}'.format(type(instance).__name__, instance.id)
+                Dict[key] = instance'''
+
+            for instance in self.__session.query(State):
                 key = '{}.{}'.format(type(instance).__name__, instance.id)
                 Dict[key] = instance
 
-            for intance in self.__session.query(State):
+            for instance in self.__session.query(City):
                 key = '{}.{}'.format(type(instance).__name__, instance.id)
                 Dict[key] = instance
 
-            for intance in session.query(City):
+            '''for intance in session.query(Amenity):
                 key = '{}.{}'.format(type(instance).__name__, instance.id)
-                Dict[key] = instance
+                Dict[key] = instance'''
 
-            for intance in session.query(Amenity):
+            '''for intance in session.query(Place):
                 key = '{}.{}'.format(type(instance).__name__, instance.id)
-                Dict[key] = instance
+                Dict[key] = instance'''
 
-            for intance in session.query(Place):
+            '''for intance in session.query(Review):
                 key = '{}.{}'.format(type(instance).__name__, instance.id)
-                Dict[key] = instance
-
-            for intance in session.query(Review):
-                key = '{}.{}'.format(type(instance).__name__, instance.id)
-                Dict[key] = instance
+                Dict[key] = instance'''
 
         return Dict
 
