@@ -60,9 +60,9 @@ class DBStorage:
 
         else:
 
-            '''for intance in self.__session.query(User):
+            for instance in self.__session.query(User):
                 key = '{}.{}'.format(type(instance).__name__, instance.id)
-                Dict[key] = instance'''
+                Dict[key] = instance
 
             for instance in self.__session.query(State):
                 key = '{}.{}'.format(type(instance).__name__, instance.id)
@@ -72,15 +72,15 @@ class DBStorage:
                 key = '{}.{}'.format(type(instance).__name__, instance.id)
                 Dict[key] = instance
 
-            '''for intance in session.query(Amenity):
+            '''for instance in session.query(Amenity):
                 key = '{}.{}'.format(type(instance).__name__, instance.id)
                 Dict[key] = instance'''
 
-            '''for intance in session.query(Place):
+            '''for instance in session.query(Place):
                 key = '{}.{}'.format(type(instance).__name__, instance.id)
                 Dict[key] = instance'''
 
-            '''for intance in session.query(Review):
+            '''for instance in session.query(Review):
                 key = '{}.{}'.format(type(instance).__name__, instance.id)
                 Dict[key] = instance'''
 
