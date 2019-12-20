@@ -59,7 +59,6 @@ class HBNBCommand(cmd.Cmd):
                 if value.startswith('"'):
                     var = value.replace('_', ' ')
                     var_2 = eval(var.replace('"', '\"'))
-                    print(var_2)
                     setattr(obj, key, var_2)
 
                 elif '.' in value:
