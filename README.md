@@ -150,4 +150,4 @@ All the peers that contributed with their knowledge
 ### Authors  
 ✒️
 * [Daniel Ramirez](https://twitter.com/Gomba662)
-* [Sergio Rueda](https://twitter.com/sechchr)
+* [Sergio Rueda](https://twitter.com/sechchr).
