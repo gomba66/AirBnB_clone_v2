@@ -72,9 +72,9 @@ class DBStorage:
                 key = '{}.{}'.format(type(instance).__name__, instance.id)
                 Dict[key] = instance
 
-            '''for instance in self.__session.query(Amenity):
+            for instance in self.__session.query(Amenity):
                 key = '{}.{}'.format(type(instance).__name__, instance.id)
-                Dict[key] = instance'''
+                Dict[key] = instance
 
             for instance in self.__session.query(Place):
                 key = '{}.{}'.format(type(instance).__name__, instance.id)
