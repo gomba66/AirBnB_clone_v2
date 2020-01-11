@@ -18,10 +18,16 @@ do
 done
 
 # creating fake HTML to test Nginx config
-echo 'successful test' > /data/web_static/releases/test/index.html
+echo "<html>
+  <head>
+  </head>
+  <body>
+    Holberton School
+  </body>
+</html>" > /data/web_static/releases/test/index.html
 
 # creating symbolic linked to /data/web_static/releases/test/
-ln -sf /data/web_static/current /data/web_static/releases/test/
+ln -sf /data/web_static/releases/test/ /data/web_static/current
 
 # Give ownership of the /data/ folder to the ubuntu user AND group
 chown -R ubuntu /data/
