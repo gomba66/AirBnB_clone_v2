@@ -21,13 +21,7 @@ done
 echo 'successful test' > /data/web_static/releases/test/index.html
 
 # creating symbolic linked to /data/web_static/releases/test/
-if [[ -f /data/web_static/current ]]
-then
-	rm /data/web_static/current
-	ln -s /data/web_static/current /data/web_static/releases/test/
-else
-	ln -s /data/web_static/current /data/web_static/releases/test/
-fi
+ln -sf /data/web_static/current /data/web_static/releases/test/
 
 # Give ownership of the /data/ folder to the ubuntu user AND group
 chown -R ubuntu /data/
