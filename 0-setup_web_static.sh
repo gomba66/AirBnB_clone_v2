@@ -35,6 +35,6 @@ chown -R :ubuntu /data/
 
 # Update the Nginx configuration to serve the content of /data/web_static/current/ to hbnb_static
 old_string="# include snippets/snakeoil.conf;"
-new_string="/tlocation hbnb_static {/n/t/talias /data/web_static/current/;/n/t}"
+new_string="\tlocation hbnb_static {\n\t\talias /data/web_static/current/;\n\t}"
 sed -i "s%$old_string%$new_string%" /etc/nginx/sites-available/default
 service nginx restart
