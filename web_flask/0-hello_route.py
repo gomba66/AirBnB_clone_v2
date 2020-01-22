@@ -11,7 +11,7 @@ def display_r():
     """
     Function that display a message when the flask service is online
     """
-    return("Hello HBNB")
+    return("Hello HBNB!")
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=5000)
