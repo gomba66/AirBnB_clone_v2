@@ -34,7 +34,7 @@ def display_txt(text):
 
 
 @app.route('/python/<text>', strict_slashes=False)
-def display_txt2(text):
+def display_txt2(text="is cool"):
     """
     Function that print a message
     using the text of the user
