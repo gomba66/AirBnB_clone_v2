@@ -1,40 +1,41 @@
 #!/usr/bin/python3
-""" Function that compress a folder """
+""" using fabric and create a tar file .tgz
+"""
 from datetime import datetime
 from fabric.api import *
-import shlex
 import os
-
+import shlex
 
 env.hosts = ['35.231.161.8', '35.196.8.154']
-env.user = "ubuntu"
+env.user = 'ubuntu'
 
 
 def do_deploy(archive_path):
-    """ Deploys """
+    """ send and run commands in a server
+    """
     if not os.path.exists(archive_path):
-        return False
+        return (False)
     try:
-        name = archive_path.replace('/', ' ')
+        # getting just name with .tgz
+        name_ext = archive_path.replace('/', ' ')
+        name_ext = shlex.split(name_ext)
+        name_ext = name_ext[-1]
+        # gettin just name without extension
+        name = name_ext.replace('.', ' ')
         name = shlex.split(name)
-        name = name[-1]
-
-        wname = name.replace('.', ' ')
-        wname = shlex.split(wname)
-        wname = wname[0]
-
-        releases_path = "/data/web_static/releases/{}/".format(wname)
-        tmp_path = "/tmp/{}".format(name)
-
+        name = name[0]
+        # varible of directory
+        dir = "/data/web_static/releases/"
+        # instructions
         put(archive_path, "/tmp/")
-        run("mkdir -p {}".format(releases_path))
-        run("tar -xzf {} -C {}".format(tmp_path, releases_path))
-        run("rm {}".format(tmp_path))
-        run("mv {}web_static/* {}".format(releases_path, releases_path))
-        run("rm -rf {}web_static".format(releases_path))
-        run("rm -rf /data/web_static/current")
-        run("ln -s {} /data/web_static/current".format(releases_path))
+        run("sudo mkdir -p {}{}/".format(dir, name))
+        run("sudo tar -xzf /tmp/{} -C {}{}/".format(name_ext, dir, name))
+        run("sudo rm /tmp/{}".format(name_ext))
+        run("sudo mv {}{}/web_static/* {}{}/".format(dir, name, dir, name))
+        run("sudo rm -rf {}{}/web_static".format(dir, name))
+        run("sudo rm -rf /data/web_static/current")
+        run("sudo ln -s {}{}/ /data/web_static/current".format(dir, name))
         print("New version deployed!")
-        return True
+        return (True)
     except:
-        return False
+        return (False)
