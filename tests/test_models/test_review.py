@@ -2,6 +2,7 @@
 """test for review"""
 import unittest
 import os
+from os import getenv
 from models.review import Review
 from models.base_model import BaseModel
 import pep8
@@ -59,8 +60,7 @@ class TestReview(unittest.TestCase):
         self.assertEqual(type(self.rev.place_id), str)
         self.assertEqual(type(self.rev.user_id), str)
 
-    @unittest.skipIf(os.getenv("HBNB_TYPE_STORAGE") == "db",
-                     "not supported if is different to db type_storage")
+    @unittest.skipIf(getenv("HBNB_TYPE_STORAGE") == 'db', 'DB')
     def test_save_Review(self):
         """test if the save works"""
         self.rev.save()

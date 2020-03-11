@@ -2,6 +2,7 @@
 """test for BaseModel"""
 import unittest
 import os
+from os import getenv
 from models.base_model import BaseModel
 import pep8
 
@@ -52,8 +53,7 @@ class TestBaseModel(unittest.TestCase):
         """test if the base is an type BaseModel"""
         self.assertTrue(isinstance(self.base, BaseModel))
 
-    @unittest.skipIf(os.getenv("HBNB_TYPE_STORAGE") == "db",
-                     "not supported if is different to db type_storage")
+    @unittest.skipIf(getenv("HBNB_TYPE_STORAGE") == 'db', 'DB')
     def test_save_BaesModel(self):
         """test if the save works"""
         self.base.save()

@@ -1,10 +1,12 @@
 #!/usr/bin/python3
 """This is the state class"""
-
-import os
+from sqlalchemy.ext.declarative import declarative_base
 from models.base_model import BaseModel, Base
-from sqlalchemy import Column, Integer, String, ForeignKey
 from sqlalchemy.orm import relationship
+from sqlalchemy import Column, Integer, String
+import models
+from models.city import City
+import shlex
 
 
 class State(BaseModel, Base):
@@ -12,29 +14,22 @@ class State(BaseModel, Base):
     Attributes:
         name: input name
     """
-
-    type_of_storage = os.getenv('HBNB_TYPE_STORAGE')
-
-    __tablename__ = 'states'
+    __tablename__ = "states"
     name = Column(String(128), nullable=False)
+    cities = relationship("City", cascade='all, delete, delete-orphan',
+                          backref="state")
 
-    if type_of_storage == 'db':
-        cities = relationship("City", backref="state", cascade='all, delete')
-
-    else:
-        @property
-        def cities(self):
-            """Getter attritube
-            Return:
-            list of City instances with state_id equals
-            to the current State.id
-            """
-            cities = []
-            obj_dict = storage.all(City)
-            keys = obj_dict.keys()
-
-            for key in keys:
-                if self.id in key:
-                    cities.append(obj_dict[key])
-
-            return cities
+    @property
+    def cities(self):
+        var = models.storage.all()
+        lista = []
+        result = []
+        for key in var:
+            city = key.replace('.', ' ')
+            city = shlex.split(city)
+            if (city[0] == 'City'):
+                lista.append(var[key])
+        for elem in lista:
+            if (elem.state_id == self.id):
+                result.append(elem)
+        return (result)
